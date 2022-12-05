@@ -1,10 +1,8 @@
 ﻿IEnumerable<string> file = File.ReadLines("G:\\003_PROGRAMOZAS\\aoc2022\\Day02\\input_my.txt");
 
-void Part1()
-{
+void Part1() {
     int sum = 0;
-    foreach (string line in file)
-    {
+    foreach (string line in file) {
         string enemy = line.Split(' ')[0];
         //A: Rock
         //B: Paper
@@ -14,8 +12,7 @@ void Part1()
         //Y: Paper
         //Z: Scissors
 
-        switch (me)
-        {
+        switch (me) {
             case "X":
                 sum += 1;
                 break;
@@ -28,50 +25,35 @@ void Part1()
         }
 
         // Rock VS Scissors
-        if (me == "X" && enemy == "C")
-        {
+        if (me == "X" && enemy == "C") {
             sum += 6;
             // Rock VS Paper
-        }
-        else if (me == "X" && enemy == "B")
-        {
+        } else if (me == "X" && enemy == "B") {
             sum += 0;
             // Rock VS Rock
-        }
-        else if (me == "X" && enemy == "A")
-        {
+        } else if (me == "X" && enemy == "A") {
             sum += 3;
         }
 
         // Paper VS Scissors
-        if (me == "Y" && enemy == "C")
-        {
+        if (me == "Y" && enemy == "C") {
             sum += 0;
             // Paper VS Paper
-        }
-        else if (me == "Y" && enemy == "B")
-        {
+        } else if (me == "Y" && enemy == "B") {
             sum += 3;
             // Paper VS Rock
-        }
-        else if (me == "Y" && enemy == "A")
-        {
+        } else if (me == "Y" && enemy == "A") {
             sum += 6;
         }
 
         // Scissors VS Scissors
-        if (me == "Z" && enemy == "C")
-        {
+        if (me == "Z" && enemy == "C") {
             sum += 3;
             // Scissors VS Paper
-        }
-        else if (me == "Z" && enemy == "B")
-        {
+        } else if (me == "Z" && enemy == "B") {
             sum += 6;
             // Scissors VS Rock
-        }
-        else if (me == "Z" && enemy == "A")
-        {
+        } else if (me == "Z" && enemy == "A") {
             sum += 0;
         }
     }
@@ -79,11 +61,9 @@ void Part1()
     Console.WriteLine($"Part1: A pontok összege: {sum}");
 }
 
-void Part2()
-{
+void Part2() {
     int sum = 0;
-    foreach (string line in file)
-    {
+    foreach (string line in file) {
         string enemy = line.Split(' ')[0];
         //A: Rock
         //B: Paper
@@ -94,23 +74,19 @@ void Part2()
         //Z: win
         string meChoose = "";
 
-        switch (me)
-        {
+        switch (me) {
             // Lose
             case "X":
                 // Rock kils scissors 
-                if (enemy == "A")
-                {
+                if (enemy == "A") {
                     meChoose = "C";
                 }
                 // Paper kills rock
-                else if (enemy == "B")
-                {
+                else if (enemy == "B") {
                     meChoose = "A";
                 }
                 // Scissors kills paper
-                else if (enemy == "C")
-                {
+                else if (enemy == "C") {
                     meChoose = "B";
                 }
                 break;
@@ -123,25 +99,21 @@ void Part2()
                 // Win
                 sum += 6;
                 // Rock killed by paper 
-                if (enemy == "A")
-                {
+                if (enemy == "A") {
                     meChoose = "B";
                 }
                 // Paper killed by scissors
-                else if (enemy == "B")
-                {
+                else if (enemy == "B") {
                     meChoose = "C";
                 }
                 // Scissors killed by rock
-                else if (enemy == "C")
-                {
+                else if (enemy == "C") {
                     meChoose = "A";
                 }
                 break;
         }
 
-        switch (meChoose)
-        {
+        switch (meChoose) {
             case "A":
                 sum += 1;
                 break;

@@ -12,11 +12,9 @@ foreach (string line in file) {
     int second_start = int.Parse(second.Split("-")[0]);
     int second_end = int.Parse(second.Split("-")[1]);
 
-    if (first_start <= second_start && second_end <= first_end)
-    {
+    if (first_start <= second_start && second_end <= first_end) {
         contained++;
-    }
-    else if (second_start <= first_start && first_end <= second_end) {
+    } else if (second_start <= first_start && first_end <= second_end) {
         contained++;
     }
 

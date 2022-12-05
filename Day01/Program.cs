@@ -2,14 +2,11 @@
 List<int> manok = new List<int>();
 int sum = 0;
 
-foreach (string line in file)
-{
-    if (line == "")
-    {
+foreach (string line in file) {
+    if (line == "") {
         manok.Add(sum);
         sum = 0;
-    }
-    else {
+    } else {
         sum += int.Parse(line);
     }
 }
