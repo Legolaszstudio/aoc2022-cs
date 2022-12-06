@@ -1,4 +1,4 @@
-﻿string[] file = File.ReadLines("G:\\003_PROGRAMOZAS\\aoc2022\\Day05\\input.txt").ToArray();
+﻿string[] file = File.ReadLines("G:\\003_programozas\\aoc2022\\Day05\\input.txt").ToArray();
 List<List<string>> tempCrates = new List<List<string>>();
 List<List<int>> moves = new List<List<int>>();
 
@@ -48,12 +48,16 @@ for (int i = 0; i < file.Count(); i++) {
 
 // Rotate matrix; it is easier to work like this
 List<List<string>> crates = new List<List<string>>();
+List<List<string>> originalCrates = new List<List<string>>();
 int columns = (file[0].Length + 1) / 4;
 for (int i = 0; i < columns; i++) {
     crates.Add(new List<string>());
+    originalCrates.Add(new List<string>());
     for (int j = 0; j < tempCrates.Count; j++) {
         crates[i].Add(tempCrates[j][i]);
+        originalCrates[i].Add(tempCrates[j][i]);
     }
+
 }
 
 
@@ -89,6 +93,64 @@ string output = "";
 for (int i = 0; i < crates.Count; i++) {
     int topI = crates[i].IndexOf(null) - 1;
     if (topI == -2) {
+        topI = crates[i].Count - 1;
+    }
+
+    output += crates[i][topI];
+}
+
+Console.WriteLine(output);
+
+
+// ------------- Part 2 ------------
+crates = originalCrates;
+foreach (List<int> move in moves)
+{
+    int howMany = move[0];
+    int fromWhere = move[1] - 1;
+    int toWhere = move[2] - 1;
+
+    //Find top index
+    int topIndexFrom = crates[fromWhere].IndexOf(null);
+    if (topIndexFrom == -1)
+    {
+        topIndexFrom = crates[fromWhere].Count;
+    }
+    topIndexFrom = topIndexFrom - howMany;
+
+    //Find top where to put
+    int topIndexTo = crates[toWhere].IndexOf(null);
+    if (topIndexTo == -1)
+    {
+        topIndexTo = crates[toWhere].Count;
+        // add empty space at top
+        foreach (List<string> col in crates)
+        {
+            col.Add(null);
+        }
+    }
+
+    for (int i = topIndexFrom; i < topIndexFrom + howMany; i++) {
+        string toMoveLetter = crates[fromWhere][i];
+        crates[fromWhere][i] = null;
+
+        if (topIndexTo >= crates[toWhere].Count) {
+            foreach (List<string> col in crates)
+            {
+                col.Add(null);
+            }
+        }
+        crates[toWhere][topIndexTo] = toMoveLetter;
+        topIndexTo++;
+    }
+}
+
+output = "";
+for (int i = 0; i < crates.Count; i++)
+{
+    int topI = crates[i].IndexOf(null) - 1;
+    if (topI == -2)
+    {
         topI = crates[i].Count - 1;
     }
 
