@@ -1,4 +1,4 @@
-﻿string[] file = File.ReadLines("G:\\003_programozas\\aoc2022\\Day05\\input.txt").ToArray();
+﻿string[] file = File.ReadLines("G:\\003_PROGRAMOZAS\\aoc2022\\Day05\\input.txt").ToArray();
 List<List<string>> tempCrates = new List<List<string>>();
 List<List<int>> moves = new List<List<int>>();
 
@@ -104,28 +104,24 @@ Console.WriteLine(output);
 
 // ------------- Part 2 ------------
 crates = originalCrates;
-foreach (List<int> move in moves)
-{
+foreach (List<int> move in moves) {
     int howMany = move[0];
     int fromWhere = move[1] - 1;
     int toWhere = move[2] - 1;
 
     //Find top index
     int topIndexFrom = crates[fromWhere].IndexOf(null);
-    if (topIndexFrom == -1)
-    {
+    if (topIndexFrom == -1) {
         topIndexFrom = crates[fromWhere].Count;
     }
     topIndexFrom = topIndexFrom - howMany;
 
     //Find top where to put
     int topIndexTo = crates[toWhere].IndexOf(null);
-    if (topIndexTo == -1)
-    {
+    if (topIndexTo == -1) {
         topIndexTo = crates[toWhere].Count;
         // add empty space at top
-        foreach (List<string> col in crates)
-        {
+        foreach (List<string> col in crates) {
             col.Add(null);
         }
     }
@@ -135,8 +131,7 @@ foreach (List<int> move in moves)
         crates[fromWhere][i] = null;
 
         if (topIndexTo >= crates[toWhere].Count) {
-            foreach (List<string> col in crates)
-            {
+            foreach (List<string> col in crates) {
                 col.Add(null);
             }
         }
@@ -146,11 +141,9 @@ foreach (List<int> move in moves)
 }
 
 output = "";
-for (int i = 0; i < crates.Count; i++)
-{
+for (int i = 0; i < crates.Count; i++) {
     int topI = crates[i].IndexOf(null) - 1;
-    if (topI == -2)
-    {
+    if (topI == -2) {
         topI = crates[i].Count - 1;
     }
 
