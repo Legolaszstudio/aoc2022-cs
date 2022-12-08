@@ -1,7 +1,5 @@
-﻿List<string> file = File.ReadLines("G:\\003_PROGRAMOZAS\\aoc2022\\Day07\\example.txt").ToList();
+﻿List<string> file = File.ReadLines("G:\\003_PROGRAMOZAS\\aoc2022\\Day07\\input.txt").ToList();
 file.RemoveAt(0);
-
-
 
 DirectoryItem root = new DirectoryItem(null, "/", true);
 DirectoryItem currentParent = root;
@@ -51,7 +49,78 @@ while (i < file.Count) {
     }
 }
 
-Console.WriteLine();
+walkGraph(root);
+
+unsafe {
+    int sum = 0;
+    int* sumPointer = &sum;
+    resultOne(sumPointer, root);
+    Console.WriteLine(sum);
+
+    int* resultOne(int *sum, DirectoryItem node)
+    {
+        foreach (DirectoryItem child in node.children)
+        {
+            if (child.isDir)
+            {
+                resultOne(sum, child);
+                if (child.size <= 100000) {
+                    *sum += child.size;
+                }
+            }
+        }
+        return sum;
+    }
+
+
+    // --------------Part two-----------------
+
+    int spaceNeeded = 30000000 - (70000000 - root.size);
+
+    List<DirectoryItem> toDelete = new List<DirectoryItem>();
+    DirectoryItem temp = new DirectoryItem(null, "fakeRoot", true);
+    temp.children.Add(root);
+
+    resultTwo(toDelete, spaceNeeded, temp);
+    //Find smallest
+    int smallest = toDelete[0].size;
+    DirectoryItem smallestItem = toDelete[0];
+    foreach (DirectoryItem item in toDelete) {
+        if (item.size < smallest) {
+            smallestItem = item;
+            smallest = item.size;
+        }
+    }
+    Console.WriteLine(smallestItem.size);
+
+
+
+    void resultTwo(List<DirectoryItem> list, int spaceNeeded, DirectoryItem node) {
+        foreach (DirectoryItem child in node.children) {
+            if (child.isDir) {
+                resultTwo(list, spaceNeeded, child);
+                if (child.size >= spaceNeeded) {
+                    list.Add(child);
+                }
+            }
+        }
+    }
+}
+
+
+void walkGraph (DirectoryItem node) {
+    foreach (DirectoryItem child in node.children) {
+        if (child.isDir)
+        {
+            walkGraph(child);
+            node.size += child.size;
+        }
+        else
+		{
+            node.size += child.size;
+		}
+    }
+}
 
 class DirectoryItem {
     public DirectoryItem parent;
