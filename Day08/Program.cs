@@ -88,7 +88,11 @@ foreach (List<Tree> sor in inputMatrix) {
 
 Console.WriteLine(count);
 
-class Tree {
+Day08.PartTwo.PartTwoMain(
+   inputMatrix.ConvertAll(x => x.ConvertAll(s => s.Clone())).ToList()
+);
+
+public class Tree {
     public bool visibleTop;
     public bool visibleBottom;
     public bool visibleLeft;
@@ -97,4 +101,15 @@ class Tree {
     public int height;
 
     public List<int> valsBefore = new List<int>();
+    public List<int> visibleCount = new List<int>();
+
+    public Tree Clone() {
+        return new Tree {
+            visibleTop = this.visibleTop,
+            visibleBottom = this.visibleBottom,
+            visibleLeft = this.visibleLeft,
+            visibleRight = this.visibleRight,
+            height = this.height,
+        };
+    }
 }
