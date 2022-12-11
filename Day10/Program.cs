@@ -1,0 +1,1 @@
+﻿string[] file = File.ReadLines("G:\\003_PROGRAMOZAS\\aoc2022\\Day10\\example.txt").ToArray();
