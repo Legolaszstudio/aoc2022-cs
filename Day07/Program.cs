@@ -57,12 +57,9 @@ unsafe {
     resultOne(sumPointer, root);
     Console.WriteLine(sum);
 
-    int* resultOne(int *sum, DirectoryItem node)
-    {
-        foreach (DirectoryItem child in node.children)
-        {
-            if (child.isDir)
-            {
+    int* resultOne(int* sum, DirectoryItem node) {
+        foreach (DirectoryItem child in node.children) {
+            if (child.isDir) {
                 resultOne(sum, child);
                 if (child.size <= 100000) {
                     *sum += child.size;
@@ -108,17 +105,14 @@ unsafe {
 }
 
 
-void walkGraph (DirectoryItem node) {
+void walkGraph(DirectoryItem node) {
     foreach (DirectoryItem child in node.children) {
-        if (child.isDir)
-        {
+        if (child.isDir) {
             walkGraph(child);
             node.size += child.size;
-        }
-        else
-		{
+        } else {
             node.size += child.size;
-		}
+        }
     }
 }
 

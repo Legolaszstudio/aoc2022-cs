@@ -37,7 +37,7 @@ void addToVisitedSet(Coor point) {
 }
 
 class Tail {
-    public Coor position = new Coor(0,0);
+    public Coor position = new Coor(0, 0);
 
     public override string ToString() {
         return $"T({position.x};{position.y})";

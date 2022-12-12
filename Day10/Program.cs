@@ -13,12 +13,12 @@ foreach (string line in file) {
 }
 
 List<int> neededVals = new List<int>();
-neededVals.Add(registerValues[20-1] * 20);
-neededVals.Add(registerValues[60-1] * 60);
-neededVals.Add(registerValues[100-1] * 100);
-neededVals.Add(registerValues[140-1] * 140);
-neededVals.Add(registerValues[180-1] * 180);
-neededVals.Add(registerValues[220-1] * 220);
+neededVals.Add(registerValues[20 - 1] * 20);
+neededVals.Add(registerValues[60 - 1] * 60);
+neededVals.Add(registerValues[100 - 1] * 100);
+neededVals.Add(registerValues[140 - 1] * 140);
+neededVals.Add(registerValues[180 - 1] * 180);
+neededVals.Add(registerValues[220 - 1] * 220);
 
 Console.WriteLine(neededVals.Sum());
 
@@ -41,8 +41,8 @@ for (int i = 0; i < 6; i++) {
 
 int crt_x = 0;
 int crt_y = 0;
-for (int cyc = 1; (cyc-1) < registerValues.Count; cyc++) {
-    int currValue = registerValues[cyc-1];
+for (int cyc = 1; (cyc - 1) < registerValues.Count; cyc++) {
+    int currValue = registerValues[cyc - 1];
     if (currValue == crt_x || currValue == crt_x - 1 || currValue == crt_x + 1) {
         crt[crt_y][crt_x] = 1;
     }

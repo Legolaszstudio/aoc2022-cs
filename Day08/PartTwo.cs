@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Day08 {
+﻿namespace Day08 {
     internal class PartTwo {
         public static void PartTwoMain(List<List<Tree>> input) {
             for (int i = 0; i < input.Count; i++) {
@@ -13,7 +7,7 @@ namespace Day08 {
 
                     // Lefele
                     int counter = 0;
-                    for (int i2 = i+1; i2 < input.Count; i2++) {
+                    for (int i2 = i + 1; i2 < input.Count; i2++) {
                         Tree current2 = input[i2][j];
                         if (current2.height >= current.height) {
                             counter++;
@@ -37,7 +31,7 @@ namespace Day08 {
 
                     // Jobbra
                     counter = 0;
-                    for (int j2 = j+1; j2 < input[i].Count; j2++) {
+                    for (int j2 = j + 1; j2 < input[i].Count; j2++) {
                         Tree current2 = input[i][j2];
                         if (current2.height >= current.height) {
                             counter++;
