@@ -1,4 +1,4 @@
-﻿string[] monkeysIn = File.ReadAllText("G:\\003_PROGRAMOZAS\\aoc2022\\Day11\\example.txt").Split("\r\n\r\n");
+﻿string[] monkeysIn = File.ReadAllText("G:\\003_PROGRAMOZAS\\aoc2022\\Day11\\input.txt").Split("\r\n\r\n");
 List<Monkey> monkeys = new List<Monkey>();
 
 foreach (string monkey in monkeysIn) {
@@ -14,15 +14,17 @@ foreach (string monkey in monkeysIn) {
     monkeys.Add(temp);
 }
 
-for (int round = 1; round <= 1000; round++) {
+int LCM = monkeys.Aggregate(1, (x, y) => x * y.divisor);
+
+for (int round = 1; round <= 10000; round++) {
     foreach (Monkey monke in monkeys) {
         for (int i = 0; i < monke.items.Count; i++) {
             monke.items[i] = Eval($"{monke.items[i]}{monke.operation.Replace("old", monke.items[i].ToString())}");
-            monke.items[i] = (ulong)Math.Floor(monke.items[i] / 3.0);
+            //monke.items[i] = (ulong)Math.Floor(monke.items[i] / 3.0);
             if (monke.items[i] % (ulong)monke.divisor == 0) {
-                monkeys[monke.tMonkey].items.Add(monke.items[i]);
+                monkeys[monke.tMonkey].items.Add(monke.items[i] % (ulong)LCM);
             } else {
-                monkeys[monke.fMonkey].items.Add(monke.items[i]);
+                monkeys[monke.fMonkey].items.Add(monke.items[i] % (ulong)LCM);
             }
             monke.inspects += 1;
         }
